@@ -47,6 +47,27 @@ import soulEs from "./locales/es/soul";
 import memoryEs from "./locales/es/memory";
 import installEs from "./locales/es/install";
 import constantsEs from "./locales/es/constants";
+import commonFr from "./locales/fr/common";
+import navigationFr from "./locales/fr/navigation";
+import welcomeFr from "./locales/fr/welcome";
+import setupFr from "./locales/fr/setup";
+import chatFr from "./locales/fr/chat";
+import settingsFr from "./locales/fr/settings";
+import toolsFr from "./locales/fr/tools";
+import sessionsFr from "./locales/fr/sessions";
+import modelsFr from "./locales/fr/models";
+import providersFr from "./locales/fr/providers";
+import officeFr from "./locales/fr/office";
+import errorsFr from "./locales/fr/errors";
+import schedulesFr from "./locales/fr/schedules";
+import skillsFr from "./locales/fr/skills";
+import gatewayFr from "./locales/fr/gateway";
+import agentsFr from "./locales/fr/agents";
+import soulFr from "./locales/fr/soul";
+import memoryFr from "./locales/fr/memory";
+import installFr from "./locales/fr/install";
+import constantsFr from "./locales/fr/constants";
+import kanbanFr from "./locales/fr/kanban";
 import commonId from "./locales/id/common";
 import navigationId from "./locales/id/navigation";
 import welcomeId from "./locales/id/welcome";
@@ -217,6 +238,31 @@ export const resources = {
       memory: memoryEs,
       install: installEs,
       constants: constantsEs,
+    },
+  },
+  fr: {
+    translation: {
+      common: commonFr,
+      navigation: navigationFr,
+      welcome: welcomeFr,
+      setup: setupFr,
+      chat: chatFr,
+      settings: settingsFr,
+      tools: toolsFr,
+      sessions: sessionsFr,
+      models: modelsFr,
+      providers: providersFr,
+      office: officeFr,
+      errors: errorsFr,
+      schedules: schedulesFr,
+      skills: skillsFr,
+      gateway: gatewayFr,
+      agents: agentsFr,
+      soul: soulFr,
+      memory: memoryFr,
+      install: installFr,
+      constants: constantsFr,
+      kanban: kanbanFr,
     },
   },
   id: {

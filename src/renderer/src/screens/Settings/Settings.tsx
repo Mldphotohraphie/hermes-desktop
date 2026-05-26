@@ -21,6 +21,7 @@ const TELEGRAM_COMMUNITY_URL = "https://t.me/hermes_agent_desktop";
 const LANGUAGE_NATIVE_NAMES: Record<AppLocale, string> = {
   en: "English",
   es: "Español",
+  fr: "Français",
   id: "Bahasa Indonesia",
   ja: "日本語",
   "pt-BR": "Português (BR)",
