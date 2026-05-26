@@ -114,11 +114,6 @@ function Settings({ profile }: { profile?: string }): React.JSX.Element {
   const [logPath, setLogPath] = useState("");
   const [logsExpanded, setLogsExpanded] = useState(false);
 
-  // Network settings
-  const [forceIpv4, setForceIpv4] = useState(false);
-  const [httpProxy, setHttpProxy] = useState("");
-  const [networkSaved, setNetworkSaved] = useState(false);
-
   // Debug dump
   const [dumpOutput, setDumpOutput] = useState<string | null>(null);
   const [dumpRunning, setDumpRunning] = useState(false);
@@ -146,14 +141,6 @@ function Settings({ profile }: { profile?: string }): React.JSX.Element {
     setSshRemotePort(conn.ssh?.remotePort ? String(conn.ssh.remotePort) : "");
     setApiServerKeyMissing(!keyStatus.hasKey);
     connLoaded.current = true;
-
-    // Load network settings from config.yaml
-    window.hermesAPI.getConfig("network.force_ipv4", profile).then((v) => {
-      setForceIpv4(v === "true" || v === "True");
-    });
-    window.hermesAPI.getConfig("network.proxy", profile).then((v) => {
-      setHttpProxy(v || "");
-    });
 
     // Defer slow calls — background refresh, cached values show instantly
     window.hermesAPI.getHermesVersion().then((v) => {
@@ -862,70 +849,6 @@ function Settings({ profile }: { profile?: string }): React.JSX.Element {
           <LanguageSelect locale={locale} onSelect={setLocale} />
           <div className="settings-field-hint">
             {t("settings.language.hint")}
-          </div>
-        </div>
-      </div>
-
-      <div className="settings-section">
-        <div className="settings-section-title">
-          {t("settings.networkSection")}
-          {networkSaved && (
-            <span className="settings-saved" style={{ marginLeft: 8 }}>
-              {t("settings.saved")}
-            </span>
-          )}
-        </div>
-        <div className="settings-field">
-          <label className="settings-field-label">
-            {t("settings.forceIpv4")}
-            <label
-              className="tools-toggle"
-              style={{ marginLeft: 12, verticalAlign: "middle" }}
-            >
-              <input
-                type="checkbox"
-                checked={forceIpv4}
-                onChange={async (e) => {
-                  const val = e.target.checked;
-                  setForceIpv4(val);
-                  await window.hermesAPI.setConfig(
-                    "network.force_ipv4",
-                    val ? "true" : "false",
-                    profile,
-                  );
-                  setNetworkSaved(true);
-                  setTimeout(() => setNetworkSaved(false), 2000);
-                }}
-              />
-              <span className="tools-toggle-track" />
-            </label>
-          </label>
-          <div className="settings-field-hint">
-            {t("settings.forceIpv4Hint")}
-          </div>
-        </div>
-        <div className="settings-field">
-          <label className="settings-field-label">
-            {t("settings.httpProxy")}
-          </label>
-          <input
-            className="input"
-            type="text"
-            value={httpProxy}
-            onChange={(e) => setHttpProxy(e.target.value)}
-            onBlur={async () => {
-              await window.hermesAPI.setConfig(
-                "network.proxy",
-                httpProxy.trim(),
-                profile,
-              );
-              setNetworkSaved(true);
-              setTimeout(() => setNetworkSaved(false), 2000);
-            }}
-            placeholder={t("settings.proxyPlaceholder")}
-          />
-          <div className="settings-field-hint">
-            {t("settings.httpProxyHint")}
           </div>
         </div>
       </div>
