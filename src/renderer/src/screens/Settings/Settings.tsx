@@ -4,10 +4,6 @@ import { THEME_OPTIONS } from "../../constants";
 import { useI18n } from "../../components/useI18n";
 import { APP_LOCALES, type AppLocale } from "../../../../shared/i18n";
 import { Check, ChevronDown, Download, Upload, FileText } from "lucide-react";
-import {
-  getAnalyticsConsent,
-  setAnalyticsConsent,
-} from "../../utils/analytics";
 
 const LANGUAGE_NATIVE_NAMES: Record<AppLocale, string> = {
   en: "English",
@@ -126,11 +122,6 @@ function Settings({ profile }: { profile?: string }): React.JSX.Element {
   // Debug dump
   const [dumpOutput, setDumpOutput] = useState<string | null>(null);
   const [dumpRunning, setDumpRunning] = useState(false);
-
-  // Analytics consent
-  const [analyticsEnabled, setAnalyticsEnabled] = useState(() =>
-    getAnalyticsConsent(),
-  );
 
   const loadConfig = useCallback(async (): Promise<void> => {
     // Load fast config first (cached in main process)
@@ -872,45 +863,6 @@ function Settings({ profile }: { profile?: string }): React.JSX.Element {
           <div className="settings-field-hint">
             {t("settings.language.hint")}
           </div>
-        </div>
-      </div>
-
-      <div className="settings-section">
-        <div className="settings-section-title">
-          {t("settings.sections.privacy")}
-        </div>
-        <div className="settings-field">
-          <label className="settings-field-label">
-            {t("settings.analytics.label")}
-            <label
-              className="tools-toggle"
-              style={{ marginLeft: 12, verticalAlign: "middle" }}
-            >
-              <input
-                type="checkbox"
-                checked={analyticsEnabled}
-                onChange={(e) => {
-                  const enabled = e.target.checked;
-                  setAnalyticsEnabled(enabled);
-                  setAnalyticsConsent(enabled);
-                }}
-              />
-              <span className="tools-toggle-track" />
-            </label>
-          </label>
-          <div className="settings-field-hint">
-            {t("settings.analytics.hint")}
-          </div>
-          <ul
-            className="settings-field-hint"
-            style={{ paddingLeft: "1.25em", marginTop: 4 }}
-          >
-            <li>{t("settings.analytics.disclosure.uuid")}</li>
-            <li>{t("settings.analytics.disclosure.platform")}</li>
-            <li>{t("settings.analytics.disclosure.navigation")}</li>
-            <li>{t("settings.analytics.disclosure.endpoint")}</li>
-            <li>{t("settings.analytics.disclosure.notCollected")}</li>
-          </ul>
         </div>
       </div>
 
